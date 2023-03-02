@@ -15,8 +15,8 @@ public class Basics {
         //Insert Employee
         System.out.println("Insert new Employees");
         em.getTransaction().begin();
-        EmployeeEntity e1 = new EmployeeEntity( "Christophe", 00);
-        EmployeeEntity e2 = new EmployeeEntity( "Diogo", 42);
+        EmployeeEntity e1 = new EmployeeEntity("Christophe", 0);
+        EmployeeEntity e2 = new EmployeeEntity("Diogo", 42);
 
         em.persist(e1);
         em.persist(e2);
@@ -28,7 +28,7 @@ public class Basics {
         em.getTransaction().begin();
         em.createQuery("SELECT e FROM EmployeeEntity e", EmployeeEntity.class)
                 .getResultList()
-                .forEach(employee -> employee.print());
+                .forEach(EmployeeEntity::print);
         em.getTransaction().commit();
 
 
@@ -95,7 +95,7 @@ public class Basics {
         em.persist(employee);
         em.getTransaction().commit();
 
-        
+
         // Create a Company
         em.getTransaction().begin();
         CompanyEntity c1 = new CompanyEntity();
@@ -122,9 +122,9 @@ public class Basics {
 
 
         System.out.println(company.getName() + " has the following employees:");
-        company.getEmployees().forEach(e -> e.print());
+        company.getEmployees().forEach(EmployeeEntity::print);
         System.out.println("has the following addresses:");
-        company.getAddress().forEach(a -> a.print());
+        company.getAddress().forEach(AddressEntity::print);
 
         company = em.createQuery("select c from CompanyEntity c where c.name = :name", CompanyEntity.class)
                 .setParameter("name", "Universidade")
@@ -145,7 +145,7 @@ public class Basics {
                 .setMaxResults(1)
                 .getSingleResult();
 
-        employee.getCompanies().forEach(c -> c.print());
+        employee.getCompanies().forEach(CompanyEntity::print);
         em.persist(employee);
         em.getTransaction().commit();
 
