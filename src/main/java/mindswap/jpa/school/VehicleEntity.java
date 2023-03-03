@@ -2,8 +2,8 @@ package mindswap.jpa.school;
 
 import javax.persistence.*;
 
-@MappedSuperclass
-public class Vehicle {
+@Entity
+public class VehicleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -14,19 +14,17 @@ public class Vehicle {
 
     private String brand;
 
+    private VehiclesType type;
+
     private int year;
 
     @ManyToOne
     private TeacherEntity owner;
 
-    @OneToOne
-    private ParkingSpotEntity parkingSpotEntity;
-
-
-    public Vehicle(Long id, String license_plate, String brand, int year) {
-        this.id = id;
+    public VehicleEntity(String license_plate, String brand, int year, VehiclesType type) {
         this.license_plate = license_plate;
         this.brand = brand;
+        this.type = type;
         this.year = year;
     }
 
@@ -62,11 +60,21 @@ public class Vehicle {
         return owner;
     }
 
-    public ParkingSpotEntity getParkingSpot() {
-        return parkingSpotEntity;
+    public Long getId() {
+        return id;
     }
 
-    public void setParkingSpot(ParkingSpotEntity parkingSpotEntity) {
-        this.parkingSpotEntity = parkingSpotEntity;
+    public VehiclesType getType() {
+        return type;
+    }
+
+    public void printVehicles() {
+        System.out.println("VehiclesEntity{" +
+                "id=" + getId() +
+                ", owner='" + getOwner() + '\'' +
+                ", brand='" + getBrand() + '\'' +
+                ", type='" + getType() + '\'' +
+                ", year=" + getYear() +
+                '}');
     }
 }

@@ -9,8 +9,8 @@ import java.util.Set;
 @Entity
 public class TeacherEntity extends Person {
 
-    @OneToMany
-    private Set<Vehicle> vehicles = new HashSet<>();
+    @OneToMany (targetEntity = VehicleEntity.class)
+    private Set<VehicleEntity> vehicleEntities = new HashSet<>();
 
     @OneToOne
     private ParkingSpotEntity parkingSpotEntity;
@@ -22,13 +22,13 @@ public class TeacherEntity extends Person {
         this.discipline = discipline;
     }
 
-    public Set<Vehicle> getVehicles() {
-        return vehicles;
+    public Set<VehicleEntity> getVehicles() {
+        return vehicleEntities;
     }
 
-    public void addVehicle(Vehicle vehicle) {
-        vehicles.add(vehicle);
-        vehicle.setOwner(this);
+    public void addVehicle(VehicleEntity vehicleEntity) {
+        vehicleEntities.add(vehicleEntity);
+        vehicleEntity.setOwner(this);
     }
 
     public ParkingSpotEntity getParkingSpot() {
@@ -41,11 +41,11 @@ public class TeacherEntity extends Person {
     }
 
     public void printTeachers() {
-
         System.out.println("TeacherIdentity{" +
                 "id=" + getPersonId() +
                 ", name='" + getName() + '\'' +
                 ", discipline=" + discipline +
                 '}');
     }
+
 }

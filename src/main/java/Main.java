@@ -1,4 +1,7 @@
+import mindswap.jpa.school.ParkingSpotEntity;
 import mindswap.jpa.school.TeacherEntity;
+import mindswap.jpa.school.VehicleEntity;
+import mindswap.jpa.school.VehiclesType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,6 +36,88 @@ public class Main {
                 .forEach(TeacherEntity::printTeachers);
 
         em.getTransaction().commit();
+
+        // Creates parking spots
+        em.getTransaction().begin();
+        ParkingSpotEntity p1 = new ParkingSpotEntity(t1);
+        ParkingSpotEntity p2 = new ParkingSpotEntity(t2);
+        ParkingSpotEntity p3 = new ParkingSpotEntity(t3);
+        ParkingSpotEntity p4 = new ParkingSpotEntity();
+        ParkingSpotEntity p5 = new ParkingSpotEntity();
+
+
+        t1.addParkingSpot(p1);
+        t2.addParkingSpot(p2);
+        t3.addParkingSpot(p3);
+
+        em.persist(p1);
+        em.persist(p2);
+        em.persist(p3);
+        em.persist(p4);
+        em.persist(p5);
+
+        em.getTransaction().commit();
+
+        // Create vehicles and associate with teachers
+
+        em.getTransaction().begin();
+        VehicleEntity c1 = new VehicleEntity("00AB11","bmw",2010, VehiclesType.CAR);
+        VehicleEntity c2 = new VehicleEntity("11CD12","mercedes",2020, VehiclesType.CAR);
+        t1.addVehicle(c1);
+        t1.addVehicle(c2);
+
+        VehicleEntity c3 = new VehicleEntity("55ZD15","nissan",2005, VehiclesType.CAR);
+        VehicleEntity m1 = new VehicleEntity("12KD34", "bmw",2015,VehiclesType.MOTORCYCLE);
+        t2.addVehicle(c3);
+        t2.addVehicle(m1);
+
+        VehicleEntity m2 = new VehicleEntity("54OK95", "suzuki",2003, VehiclesType.MOTORCYCLE);
+        t3.addVehicle(m2);
+
+        em.persist(c1);
+        em.persist(c2);
+        em.persist(c3);
+        em.persist(m1);
+        em.persist(m2);
+
+        em.getTransaction().commit();
+
+        // Listing all the vehicles
+        System.out.println("List of all the vehicles");
+        em.getTransaction().begin();
+
+        em.createQuery("SELECT v FROM VehicleEntity v", VehicleEntity.class)
+                .getResultList()
+                .forEach(VehicleEntity::printVehicles);
+
+        em.getTransaction().commit();
+
+
+
+        // Get all the Employees
+        System.out.println("Print all the Employees");
+
+        /*
+        //em.getTransaction().begin();
+        em.createQuery("SELECT e FROM EmployeeEntity e", EmployeeEntity.class)
+                .getResultList()
+                .forEach(EmployeeEntity::print);
+
+        em.getTransaction().commit();
+
+         */
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 }

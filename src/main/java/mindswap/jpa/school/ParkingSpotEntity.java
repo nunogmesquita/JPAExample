@@ -18,6 +18,13 @@ public class ParkingSpotEntity {
         this.owner = owner;
     }
 
+    public ParkingSpotEntity(TeacherEntity owner) {
+        this.owner = owner;
+    }
+
+    public ParkingSpotEntity() {
+    }
+
     public void setOwner(TeacherEntity person) {
         this.owner = person;
     }
