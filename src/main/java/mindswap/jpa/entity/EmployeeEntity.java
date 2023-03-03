@@ -7,11 +7,7 @@ import java.util.List;
 @Entity // To create a Entity
 public class EmployeeEntity extends Person {
 
-    //    @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-//    @Column(name = "id", nullable = false)
-//    private int id;
-//    private String name;
+
     private int age;
 
     @OneToOne(targetEntity = AddressEntity.class)  // for one to many
@@ -30,7 +26,15 @@ public class EmployeeEntity extends Person {
 
     public void setCompanies(List<CompanyEntity> companies) {
         this.companies = companies;
+//        for (     CompanyEntity company : companies) {
+//            this.companies.add(company);
+//        }
         this.companies.forEach(c -> c.getEmployees().add(this));
+    }
+
+    public void setCompany(CompanyEntity company) {
+        this.companies.add(company);
+        company.getEmployees().add(this);
     }
 
     public EmployeeEntity(String name, int age) {

@@ -26,18 +26,22 @@ public class Basics {
         // Get all the Employees
         System.out.println("Print all the Employees");
         em.getTransaction().begin();
+
         em.createQuery("SELECT e FROM EmployeeEntity e", EmployeeEntity.class)
                 .getResultList()
                 .forEach(EmployeeEntity::print);
+
         em.getTransaction().commit();
 
 
         //Update Employee with ID 1
         System.out.println("Update the first Employee");
         em.getTransaction().begin();
+
         EmployeeEntity employeeUpdate = em.find(EmployeeEntity.class, 1);
         // generate random age 0 - 100
-        employeeUpdate.setAge((int)(Math.random() * 100));
+        employeeUpdate.setAge((int) (Math.random() * 100));
+        em.persist(employeeUpdate);
         em.getTransaction().commit();
 
 
@@ -50,10 +54,13 @@ public class Basics {
         // Delete the last Employee
         System.out.println("Delete the last Employee");
         em.getTransaction().begin();
+
         EmployeeEntity lastEmployee = em.createQuery("SELECT e FROM EmployeeEntity e ORDER BY e.id DESC", EmployeeEntity.class)
                 .setMaxResults(1)
                 .getSingleResult();
+
         em.remove(lastEmployee);
+
         em.getTransaction().commit();
 
 
@@ -146,7 +153,6 @@ public class Basics {
                 .getSingleResult();
 
         employee.getCompanies().forEach(CompanyEntity::print);
-        em.persist(employee);
         em.getTransaction().commit();
 
 
