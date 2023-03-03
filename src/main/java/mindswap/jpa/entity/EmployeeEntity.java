@@ -5,25 +5,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity // To create a Entity
-public class EmployeeEntity {
+public class EmployeeEntity extends Person {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
-    private int id;
-    private String name;
+    //    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+//    @Column(name = "id", nullable = false)
+//    private int id;
+//    private String name;
     private int age;
 
     @OneToOne(targetEntity = AddressEntity.class)  // for one to many
     private AddressEntity address;
 
-    @ManyToMany(mappedBy ="employees",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) // for many to many
+    @ManyToMany(mappedBy = "employees", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) // for many to many
     private List<CompanyEntity> companies = new ArrayList<>();
 
     public EmployeeEntity() {
-
+        super();
     }
-
 
     public List<CompanyEntity> getCompanies() {
         return companies;
@@ -35,38 +34,22 @@ public class EmployeeEntity {
     }
 
     public EmployeeEntity(String name, int age) {
-        this.name = name;
+        super(name);
         this.age = age;
     }
 
     public EmployeeEntity(String name, AddressEntity address, int age) {
-        this.name = name;
+        super(name);
         this.address = address;
         this.age = age;
     }
 
     public EmployeeEntity(int id, String name, AddressEntity address, int age) {
-        this.id = id;
-        this.name = name;
+        super(id, name);
         this.address = address;
         this.age = age;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getAge() {
         return age;
@@ -85,13 +68,13 @@ public class EmployeeEntity {
     }
 
 
-public void print(){
+    public void print() {
 
-    System.out.println("EmployeeEntity{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", age=" + age +
-            ", address=" + address +
-            '}');
-}
+        System.out.println("EmployeeEntity{" +
+                "id=" + getPersonId() +
+                ", name='" + getName() + '\'' +
+                ", age=" + age +
+                ", address=" + address +
+                '}');
+    }
 }
