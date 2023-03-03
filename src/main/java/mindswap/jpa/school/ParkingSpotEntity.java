@@ -40,4 +40,11 @@ public class ParkingSpotEntity {
     public Person getOwner() {
         return owner;
     }
+
+    public void printParkingSpot() {
+        System.out.println("ParkingSpotEntity{" +
+                "id=" + getId() +
+                ", owner='" + getOwner() +
+                '}');
+    }
 }
