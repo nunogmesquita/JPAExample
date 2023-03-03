@@ -1,4 +1,4 @@
-import mindswap.jpa.entity.AddressEntity;
+/*import mindswap.jpa.entity.AddressEntity;
 import mindswap.jpa.entity.CompanyEntity;
 import mindswap.jpa.entity.EmployeeEntity;
 
@@ -160,3 +160,5 @@ public class Basics {
         em.close();
     }
 }
+
+ */

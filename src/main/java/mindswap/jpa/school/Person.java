@@ -1,4 +1,4 @@
-package mindswap.jpa.entity;
+package mindswap.jpa.school;
 
 import javax.persistence.*;
 
@@ -10,9 +10,6 @@ public class Person {
     @Column(name = "id", nullable = false)
     private int id;
     private String name;
-
-    // constructor, getters, setters
-
 
     public Person() {
     }
