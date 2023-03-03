@@ -17,7 +17,7 @@ public class Vehicle {
     private int year;
 
     @ManyToOne
-    private Person owner;
+    private TeacherEntity owner;
 
     @OneToOne
     private ParkingSpotEntity parkingSpotEntity;
@@ -54,11 +54,11 @@ public class Vehicle {
         this.year = year;
     }
 
-    public void setOwner(Person person) {
+    public void setOwner(TeacherEntity person) {
         this.owner = person;
     }
 
-    public Person getOwner() {
+    public TeacherEntity getOwner() {
         return owner;
     }
 

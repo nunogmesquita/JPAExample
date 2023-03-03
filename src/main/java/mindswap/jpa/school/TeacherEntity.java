@@ -3,13 +3,14 @@ package mindswap.jpa.school;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class TeacherEntity extends Person {
 
     @OneToMany
-    private Set<Vehicle> vehicles;
+    private Set<Vehicle> vehicles = new HashSet<>();
 
     @OneToOne
     private ParkingSpotEntity parkingSpotEntity;

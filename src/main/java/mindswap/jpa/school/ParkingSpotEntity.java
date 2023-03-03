@@ -11,14 +11,14 @@ public class ParkingSpotEntity {
     private Long id;
 
     @OneToOne
-    private Person owner;
+    private TeacherEntity owner;
 
-    public ParkingSpotEntity(Long id, Person owner) {
+    public ParkingSpotEntity(Long id, TeacherEntity owner) {
         this.id = id;
         this.owner = owner;
     }
 
-    public void setOwner(Person person) {
+    public void setOwner(TeacherEntity person) {
         this.owner = person;
     }
 
