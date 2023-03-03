@@ -61,17 +61,17 @@ public class Main {
         // Create vehicles and associate with teachers
 
         em.getTransaction().begin();
-        VehicleEntity c1 = new VehicleEntity("00AB11","bmw",2010, VehiclesType.CAR);
-        VehicleEntity c2 = new VehicleEntity("11CD12","mercedes",2020, VehiclesType.CAR);
+        VehicleEntity c1 = new VehicleEntity("00AB11", "bmw", 2010, VehiclesType.CAR);
+        VehicleEntity c2 = new VehicleEntity("11CD12", "mercedes", 2020, VehiclesType.CAR);
         t1.addVehicle(c1);
         t1.addVehicle(c2);
 
-        VehicleEntity c3 = new VehicleEntity("55ZD15","nissan",2005, VehiclesType.CAR);
-        VehicleEntity m1 = new VehicleEntity("12KD34", "bmw",2015,VehiclesType.MOTORCYCLE);
+        VehicleEntity c3 = new VehicleEntity("55ZD15", "nissan", 2005, VehiclesType.CAR);
+        VehicleEntity m1 = new VehicleEntity("12KD34", "bmw", 2015, VehiclesType.MOTORCYCLE);
         t2.addVehicle(c3);
         t2.addVehicle(m1);
 
-        VehicleEntity m2 = new VehicleEntity("54OK95", "suzuki",2003, VehiclesType.MOTORCYCLE);
+        VehicleEntity m2 = new VehicleEntity("54OK95", "suzuki", 2003, VehiclesType.MOTORCYCLE);
         t3.addVehicle(m2);
 
         em.persist(c1);
@@ -92,10 +92,17 @@ public class Main {
 
         em.getTransaction().commit();
 
+        //Finding the vehicle assigned to a particular spot
+        System.out.println("Vehicle associated to the spot");
+        em.getTransaction().begin();
+
+        em.createQuery("SELECT v FROM ParkingSpotEntity v WHERE v.owner = :id", ParkingSpotEntity.class)
+                .setParameter("id", 4)
+                .getSingleResult();
+                //.forEach(ParkingSpotEntity::getOwner);
 
 
-        // Get all the Employees
-        System.out.println("Print all the Employees");
+        em.getTransaction().commit();
 
         /*
         //em.getTransaction().begin();
@@ -106,17 +113,6 @@ public class Main {
         em.getTransaction().commit();
 
          */
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
