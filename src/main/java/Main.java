@@ -92,32 +92,37 @@ public class Main {
 
         em.getTransaction().commit();
 
+        // Find the associate Vehicle to a particular Spot
+        System.out.println("Find vehicle to a particular spot");
+        em.getTransaction().begin();
 
-
-        // Get all the Employees
-        System.out.println("Print all the Employees");
-
-        /*
-        //em.getTransaction().begin();
-        em.createQuery("SELECT e FROM EmployeeEntity e", EmployeeEntity.class)
+        em.createQuery("SELECT v FROM VehicleEntity v " +
+                        "JOIN v.owner t " +
+                        "JOIN t.parkingSpotEntity p " +
+                        "WHERE p = :parkingSpot", VehicleEntity.class)
+                .setParameter("parkingSpot", p1)
                 .getResultList()
-                .forEach(EmployeeEntity::print);
+                .forEach(VehicleEntity::printVehicles);
 
         em.getTransaction().commit();
 
-         */
 
+        // Find the owner of a particular vehicle
+        System.out.println("Find the owner of a particular vehicle");
+        em.getTransaction().begin();
 
+        em.createQuery("SELECT o FROM VehicleEntity o WHERE o.id = 9", VehicleEntity.class)
+                .getSingleResult()
+                .getOwner()
+                .printTeachers();
 
+        em.createQuery("SELECT o FROM VehicleEntity o WHERE o.id = :notworking", VehicleEntity.class)
+                .setParameter("notworking", c1)
+                .getSingleResult()
+                .getOwner()
+                .printTeachers();
 
-
-
-
-
-
-
-
-
+        em.getTransaction().commit();
 
     }
 }
